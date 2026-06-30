@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (!function_exists('mb_substr')) {
   function mb_substr($string, $start, $length = null, $encoding = null) {
     return $length === null ? substr($string, $start) : substr($string, $start, $length);
