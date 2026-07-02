@@ -16,9 +16,9 @@ date_default_timezone_set('Europe/London');
 if (!profile_is_admin()) { http_response_code(403); echo 'No access.'; exit; }
 
 function e($text){return htmlspecialchars((string)$text,ENT_QUOTES,'UTF-8');}
-function clean_text($text,$max=100){$text=trim((string)$text);$text=preg_replace('/\s+/',' ',$text);return mb_substr($text,0,$max);}
+function clean_text($text,$max=100){$text=trim((string)$text);$text=preg_replace('/\s+/',' ',$text);return mb_substr($text,0,$max);} 
 function slugify_game($name){$slug=preg_replace('/[^A-Za-z0-9]+/','-',trim((string)$name));$slug=trim($slug,'-');return $slug!==''?$slug:'New-Game';}
-function js_escape_single($text){return str_replace(["\\","'","\r","\n"],["\\\\","\\'",' ',' '],(string)$text);}
+function js_escape_single($text){return str_replace(["\\","'","\r","\n"],["\\\\","\\'",' ',' '],(string)$text);} 
 
 // ---------- NEW JSON-BASED STORAGE ----------
 // Games live in _private/games.json. Each entry:
@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (trim($gameCode) !== '') {
       file_put_contents($folder . '/index.html', $gameCode, LOCK_EX);
     } elseif (!file_exists($folder . '/index.html')) {
-      file_put_contents($folder . '/index.html', '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' . e($gameName) . '</title></head><body style="font-family:Inter,Arial,sans-serif;background:#0e1320;color:#eef3ff;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;text-align:center"><div><h1>' . e($gameName) . '</h1><p>Game coming soon.</p></div></body></html>', LOCK_EX);
+      file_put_contents($folder . '/index.html', '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' . e($gameName) . '</title></head><body style="font-family:Inter,Arial,sans-serif;backgr[...]');
     }
 
     // Handle cover image upload
@@ -218,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 usort($games, function($a, $b){ return strcasecmp($a['name'] ?? '', $b['name'] ?? ''); });
 ?>
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Game Admin</title><style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 10% 20%,rgba(95,130,220,.38),transparent 28%),linear-gradient(120deg,#080d14,#141a24 45%,#222936);color:#eaf0fd;padding:22px;padding-bottom:100px}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 10% 20%,rgba(95,130,220,.38),transparent 28%),linear-gradient(120deg[...]
 .wrap{width:min(1200px,96vw);margin:auto}
 .top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
 h1{font-size:clamp(2rem,7vw,4rem);letter-spacing:-.08em;text-transform:uppercase;margin:0}
@@ -226,15 +226,15 @@ a{color:#a2c4ff;font-weight:950}
 .grid{display:grid;grid-template-columns:360px 1fr;gap:16px}
 .card{background:rgba(24,30,41,.94);border:1px solid rgba(255,255,255,.13);border-radius:24px;padding:20px;box-shadow:0 18px 60px rgba(0,0,0,.32)}
 label{display:block;margin-top:12px;color:rgba(234,240,253,.72);font-weight:900}
-input,textarea,select{width:100%;margin-top:7px;padding:13px 14px;border-radius:14px;border:1.5px solid rgba(160,195,255,.32);background:rgba(10,15,24,.72);color:#eef3ff;font-family:inherit;font-weight:850;outline:none}
+input,textarea,select{width:100%;margin-top:7px;padding:13px 14px;border-radius:14px;border:1.5px solid rgba(160,195,255,.32);background:rgba(10,15,24,.72);color:#eef3ff;font-family:inherit;font-[...]
 textarea{min-height:260px;resize:vertical;font-family:Consolas,monospace}
-button,input[type="submit"]{border:none;border-radius:14px;padding:13px 16px;font-weight:950;cursor:pointer;font-family:inherit;background:linear-gradient(110deg,#a2c4ff 20%,#6c91c2 80%);color:#111;margin-top:14px}
+button,input[type="submit"]{border:none;border-radius:14px;padding:13px 16px;font-weight:950;cursor:pointer;font-family:inherit;background:linear-gradient(110deg,#a2c4ff 20%,#6c91c2 80%);color:#1[...]
 .status{font-weight:950;margin-bottom:10px}.bad{color:#ffd0d0}.good{color:#bfffe0}
 .game-list{display:grid;gap:10px;max-height:70vh;overflow:auto;padding-right:6px}
 .game-option{display:flex;gap:10px;align-items:center;padding:10px;border-radius:16px;background:rgba(10,15,24,.5);border:1px solid rgba(255,255,255,.09);cursor:pointer}
 .game-option:hover{background:rgba(38,58,96,.75)}
 .game-option img{width:58px;height:58px;object-fit:cover;border-radius:13px;background:#000;flex:0 0 58px}
-.game-option .game-icon-fallback{width:58px;height:58px;border-radius:13px;background:rgba(95,130,220,.3);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#a2c4ff;flex:0 0 58px}
+.game-option .game-icon-fallback{width:58px;height:58px;border-radius:13px;background:rgba(95,130,220,.3);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;col[...]
 .muted{color:rgba(234,240,253,.62);font-weight:800;line-height:1.45;font-size:.9rem}
 .enabled-badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.72rem;font-weight:950;margin-left:6px}
 .enabled-badge.on{background:rgba(100,220,100,.18);color:#6f6}.enabled-badge.off{background:rgba(220,100,100,.18);color:#f66}
@@ -261,7 +261,7 @@ button,input[type="submit"]{border:none;border-radius:14px;padding:13px 16px;fon
         $enc = e(json_encode($g));
       ?>
         <div class="game-option" data-game-search="<?= e(strtolower($g['name'] . ' ' . $folder)) ?>" onclick='pickGame(<?= $enc ?>)'>
-          <img src="<?= e($cover) ? alt="">" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="">
+          <img src="<?= e($cover) ?>" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="">
           <div class="game-icon-fallback" style="display:none"><?= e(strtoupper(mb_substr($g['name'], 0, 1))) ?></div>
           <div style="flex:1;min-width:0">
             <strong><?= e($g['name']) ?></strong>
